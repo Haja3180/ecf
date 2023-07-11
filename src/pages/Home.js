@@ -1,8 +1,27 @@
-import React from 'react'
+import React , { useState } from 'react'
+import axios from 'axios'
 import "../style/style.css"
 import Card from '../components/Card'
 
 function Home() {
+
+
+    const[meals, setMeals] = useState([]);
+    const[searchValue, setSearchValue] = useState("");
+    const[rangeValue, setRangeValue]=useState(2);
+
+    const searchMeal = ()=>{
+      axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata')
+      .then((Response) =>{setMeals(Response.data.meals)})
+    }
+    searchMeal();
+    console.log(meals);
+
+
+
+
+
+
   return (
     <div>
         <header>
@@ -25,10 +44,6 @@ function Home() {
             </button>
         </header>
         <section className="mealContainer">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
                 <Card />
         </section>
     </div>
