@@ -67,6 +67,7 @@ function Home() {
                     if(sortMethod==="decroissant"){
                     return(b.strMeal.localeCompare(a.strMeal))
                     }
+                    return 1;
                 }
                 )
                 .slice (0, rangeValue)

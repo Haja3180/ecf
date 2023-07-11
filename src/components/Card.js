@@ -1,5 +1,4 @@
 import React from 'react'
-import test from '../assets/images/test.jpg'
 import "../style/style.css"
 
 function Card({meal}) {
