@@ -1,4 +1,4 @@
-import React , { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import "../style/style.css"
 import Card from '../components/Card'
@@ -11,15 +11,11 @@ function Home() {
     const[rangeValue, setRangeValue]=useState(2);
 
     const searchMeal = ()=>{
-      axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata')
+      axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s='+searchValue)
       .then((Response) =>{setMeals(Response.data.meals)})
     }
-    searchMeal();
-    console.log(meals);
 
-
-
-
+    useEffect(searchMeal,[searchValue]);
 
 
   return (
@@ -32,8 +28,13 @@ function Home() {
                 <input 
                     type="text"
                     placeholder='Rechercher un repas'
+                    onChange={(e)=>setSearchValue(e.target.value)}
                 />
-                <button>Rechercher</button>
+                <button 
+                    id='searchBtn'
+                    onClick={()=>searchMeal()}>
+                    Rechercher
+                </button>
             </div>
             <div className="rangeContainer">
                 <input type="range" name="" id="" />
@@ -44,7 +45,9 @@ function Home() {
             </button>
         </header>
         <section className="mealContainer">
-                <Card />
+            {meals
+                .map((meal, index)=>(<Card meal={meal} key={index}/>))
+            }
         </section>
     </div>
   )
